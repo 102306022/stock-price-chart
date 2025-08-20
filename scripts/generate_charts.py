@@ -55,7 +55,7 @@ from datetime import datetime, timedelta
 from fugle_marketdata import RestClient
 
 # ====== 可調參數 ======
-SYMBOLS = ["2330", "2317", "0050"]  # 實際要抓的清單：改這裡
+SYMBOLS = ["2330", "2317", "8069"]  # 實際要抓的清單：改這裡
 DAYS_BACK = 180                        # 往回抓幾天（日K）
 MAV = (20, 60)                         # 移動均線
 OUT_DIR = "charts"
@@ -179,7 +179,7 @@ import os
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 
-SYMBOLS = ["2330", "2317", "0050"]
+SYMBOLS = ["2330", "2317", "8069"]
 OUT_DIR = "snapshots"
 K_CHART_SELECTOR = "section:has-text('股價K線')"  # 可能需依實際 DOM 更改
 TIME_RANGE_BUTTON = "text=1Y"  # 例如點「1Y」
