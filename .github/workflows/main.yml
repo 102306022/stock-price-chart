@@ -1,0 +1,35 @@
+name: weekly-fugle-charts
+
+on:
+  workflow_dispatch:        # 手動跑用的按鈕（會讓「Run workflow」出現）
+  schedule:
+    - cron: "0 1 * * 1"     # 每週一 01:00 UTC = 台北 09:00
+
+permissions:
+  contents: write           # 允許把產生的圖 commit 回 repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate charts
+        env:
+          FUGLE_API_KEY: ${{ secrets.FUGLE_API_KEY }}   # 讀你在 Settings→Secrets 設的 Key
+        run: python scripts/generate_charts.py
+
+      - name: Upload charts as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fugle-charts
+          path: charts/**/*.png
+          if-no-files-found: error
