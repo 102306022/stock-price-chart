@@ -1,0 +1,4 @@
+requests
+pandas
+mplfinance
+fugle-marketdata
